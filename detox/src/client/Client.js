@@ -169,6 +169,12 @@ class Client {
     }
   }
 
+  async invokeScheme(scheme) {
+    this._whenAppIsReady = new Deferred();
+    await this.sendAction(new actions.InvokeScheme(scheme));
+    this._whenAppIsReady.resolve();
+  }
+
   async reloadReactNative() {
     this._whenAppIsReady = new Deferred();
     await this.sendAction(new actions.ReloadReactNative());

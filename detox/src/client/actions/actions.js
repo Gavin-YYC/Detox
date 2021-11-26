@@ -68,6 +68,25 @@ class Ready extends Action {
   }
 }
 
+class InvokeScheme extends Action {
+  constructor(scheme) {
+    super('invokeScheme', { scheme });
+    this.messageId = -1000;
+  }
+
+  get isAtomic() {
+    return false;
+  }
+
+  get timeout() {
+    return 0;
+  }
+
+  async handle(response) {
+    this.expectResponseOfType(response, 'ready');
+  }
+}
+
 class ReloadReactNative extends Action {
   constructor() {
     super('reactNativeReload');
@@ -317,6 +336,7 @@ class CaptureViewHierarchy extends Action {
 module.exports = {
   Action,
   Login,
+  InvokeScheme,
   WaitForBackground,
   WaitForActive,
   Ready,

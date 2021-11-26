@@ -199,6 +199,11 @@ class RuntimeDevice {
     }
   }
 
+  async invokeScheme(scheme) {
+    await traceCall('invokeScheme', () =>
+      this.deviceDriver.invokeScheme(scheme));
+  }
+
   async reloadReactNative() {
     await traceCall('reloadRN', () =>
       this.deviceDriver.reloadReactNative());

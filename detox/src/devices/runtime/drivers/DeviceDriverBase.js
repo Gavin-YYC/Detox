@@ -122,6 +122,10 @@ class DeviceDriverBase {
     return '';
   }
 
+  async invokeScheme(scheme) {
+    return await this.client.invokeScheme(scheme);
+  }
+
   async reloadReactNative() {
     return await this.client.reloadReactNative();
   }
