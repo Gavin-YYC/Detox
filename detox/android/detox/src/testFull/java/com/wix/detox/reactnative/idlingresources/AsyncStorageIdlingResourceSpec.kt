@@ -16,6 +16,7 @@ private class AsyncStorageModuleStub: NativeModule {
     override fun initialize() {}
     override fun canOverrideExistingModule() = false
     override fun onCatalystInstanceDestroy() {}
+    override fun invalidate() {}
 }
 
 class AsyncStorageIdlingResourceSpec: Spek({
@@ -70,6 +71,11 @@ class AsyncStorageIdlingResourceSpec: Spek({
                 givenAnActiveTask()
                 givenNoPendingTasks()
                 assertThat(uut.isIdleNow).isFalse()
+
+                val expectedDescription = IdlingResourceDescription.Builder()
+                    .name("io")
+                    .build()
+                assertThat(uut.getDescription()).isEqualTo(expectedDescription)
             }
 
             it("should be busy if executor has pending tasks") {
